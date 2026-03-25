@@ -15,41 +15,46 @@
     <div class="text-center mb-10">
       <img src="https://whish.money/invoice/whish.png" class="h-10 mx-auto mb-4" alt="Whish">
       <h2 class="text-xl font-bold text-gray-800">Payment to Roy Akiki</h2>
-      <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-2">Verified Payment Portal</p>
+      <p class="text-gray-400 text-[10px] uppercase tracking-widest mt-2 font-bold">Secure Transfer</p>
     </div>
 
-    <form action="https://whish.money/invoice/pay/?q=RlIvBtlni" method="POST">
-      
-      <div class="space-y-6">
-        <div>
-          <label class="block text-[11px] font-bold text-gray-500 uppercase mb-2 ml-1">Your Whish Number</label>
-          <input type="tel" name="phoneNumber" placeholder="70 123 456" required 
-                 class="w-full border-2 border-gray-50 bg-gray-50 rounded-2xl p-4 focus:bg-white focus:border-[#E62946] outline-none transition-all">
-        </div>
-
-        <div>
-          <label class="block text-[11px] font-bold text-gray-500 uppercase mb-2 ml-1">Amount (USD)</label>
-          <div class="relative">
-             <span class="absolute left-4 top-4 text-gray-400 font-bold">$</span>
-             <input type="number" name="amount" placeholder="0.00" step="0.01" required 
-                    class="w-full border-2 border-gray-50 bg-gray-50 rounded-2xl p-4 pl-8 focus:bg-white focus:border-[#E62946] outline-none transition-all">
-          </div>
-        </div>
-
-        <button type="submit" class="w-full bg-[#E62946] text-white font-bold py-5 rounded-full shadow-lg shadow-red-100 hover:brightness-110 active:scale-95 transition-all mt-4">
-          Open Whish App
-        </button>
-      </div>
-
-      <div class="mt-10 pt-6 border-t border-gray-100 text-center">
-        <div class="flex justify-center gap-6">
-          <a href="https://whish.money/download" target="_blank" class="text-[10px] font-bold text-[#E62946] uppercase tracking-tighter">Get Whish</a>
-          <span class="text-gray-200">|</span>
-          <a href="https://whish.money/locations" target="_blank" class="text-[10px] font-bold text-gray-500 uppercase tracking-tighter">Find Agent</a>
+    <div class="space-y-6">
+      <div>
+        <label class="block text-[11px] font-bold text-gray-500 uppercase mb-2 ml-1">Amount to Transfer (USD)</label>
+        <div class="relative">
+           <span class="absolute left-4 top-4 text-gray-400 font-bold">$</span>
+           <input type="number" id="amount" placeholder="0.00" step="0.01" 
+                  class="w-full border-2 border-gray-100 bg-gray-50 rounded-2xl p-4 pl-8 focus:bg-white focus:border-[#E62946] outline-none transition-all">
         </div>
       </div>
-    </form>
+
+      <button onclick="redirectToWhish()" class="w-full bg-[#E62946] text-white font-bold py-5 rounded-full shadow-lg shadow-red-100 hover:brightness-110 active:scale-95 transition-all mt-4">
+        Open Whish App
+      </button>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gray-100 flex items-center justify-center gap-2 text-green-600 opacity-60">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <span class="text-[10px] font-bold uppercase tracking-widest">Secured by Whish Pay</span>
+    </div>
   </div>
+
+  <script>
+    function redirectToWhish() {
+      const amount = document.getElementById('amount').value;
+      if (!amount || amount <= 0) {
+        alert("Please enter a valid amount");
+        return;
+      }
+
+      // We build the link dynamically. 
+      // q=RlIvBtlni is your unique code.
+      const whishUrl = "https://whish.money/invoice/pay/?q=RlIvBtlni&amount=" + amount;
+      
+      // This will either open the Whish App (on mobile) or the Whish Web Pay (on desktop)
+      window.location.href = whishUrl;
+    }
+  </script>
 
 </body>
 </html>
